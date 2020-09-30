@@ -21,11 +21,16 @@ var Player = function(name, color, position, direction) {
 };
 
 Player.prototype.dead = function () {
-    this.graphic.position.z = this.graphic.position.z-0.1;
-        //Nettoyage de la div container
+    this.graphic.position.z = this.graphic.position.z - 0.1;
+    //Nettoyage de la div container
+
+    if (this.name === 'player1') {
+
         $("#container").html("");
-        jQuery('#'+this.name+' >.life').text("Tu es mort !");
+        jQuery('#' + this.name + ' >.life').text("Tu es mort !");
         init();
+    }
+
 }
 
 Player.prototype.accelerate = function (distance) {
@@ -51,8 +56,8 @@ Player.prototype.displayInfo = function () {
 }
 
 Player.prototype.turnRight = function (angle) {
-    this.direction += angle;
-    this.graphic.rotateOnAxis(new THREE.Vector3(0,0,1), +angle);
+    this.direction -= angle;
+    this.graphic.rotateOnAxis(new THREE.Vector3(0,0,-1), +angle);
 };
 
 Player.prototype.turnLeft = function (angle) {
@@ -67,7 +72,20 @@ Player.prototype.move = function () {
         this.graphic.position.z
     );
 
-    this.position = moveTo;
+    // this.position = moveTo;
+
+    if (moveTo.x < WIDTH / 2 && moveTo.x > 0 - WIDTH / 2){
+        this.graphic.position.x = moveTo.x;
+        light1.position.x = moveTo.x;
+        this.position.x = moveTo.x
+    }
+
+    if ( moveTo.y < HEIGHT / 2 && moveTo.y > 0 - HEIGHT / 2 ) {
+        this.graphic.position.y = moveTo.y;
+        light1.position.y = moveTo.y;
+        this.position.y = moveTo.y
+    }
+
 
     if (this.speed > 0) {
         this.speed = this.speed - 0.04;
@@ -76,10 +94,4 @@ Player.prototype.move = function () {
         this.speed = this.speed + 0.04;
     }
 
-    this.graphic.position.x = this.position.x;
-    this.graphic.position.y = this.position.y;
-    
-    light1.position.x = this.position.x;
-    light1.position.y = this.position.y;
-   //light1.position.z = this.graphic.position.z + 500;
 };

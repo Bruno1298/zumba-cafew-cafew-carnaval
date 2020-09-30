@@ -24,12 +24,23 @@ function init()
 
     noGround = [];
     ground = new Ground(0xffffff, WIDTH, HEIGHT, 10);
-    
-    player1 = new Player("player1", 0xffff00, new THREE.Vector2(50, 0), 0);
+
+
+    player1 = new Player("player1", 0xffff00, new THREE.Vector2(60, 0), 0);
     scene.add(player1.graphic);
 
     light1 = new Light("sun", 0xffffff, "0,0,340");
     scene.add(light1);
+
+    player2 = new Player("player2", 0xffffff, new THREE.Vector2(180, 0), 0);
+    scene.add(player2.graphic);
+
+    player3 = new Player("player3", 0xffffff, new THREE.Vector2(-120, 0), 0);
+    scene.add(player3.graphic);
+
+
+
+
 }
 
 function Ground(color, size_x, size_y, nb_tile)
@@ -44,8 +55,36 @@ function Ground(color, size_x, size_y, nb_tile)
     minY = -(size_y/2);
     maxY = (size_y/2);
 
+
+    // ADD default ground for the player
+    tmpGround = new THREE.Mesh(
+    new THREE.PlaneGeometry(sizeOfTileX-10, sizeOfTileY-10),
+    new THREE.MeshLambertMaterial({color: 0x00ff00, transparent: true, opacity: 0.6}));
+    tmpGround.position.x = 60;
+    tmpGround.position.y = 0;
+    scene.add(tmpGround);
+
+    tmpGround = new THREE.Mesh(
+        new THREE.PlaneGeometry(sizeOfTileX-10, sizeOfTileY-10),
+        new THREE.MeshLambertMaterial({color: 0x00ff00, transparent: true, opacity: 0.6}));
+    tmpGround.position.x = -120;
+    tmpGround.position.y = 0;
+    scene.add(tmpGround);
+
+    tmpGround = new THREE.Mesh(
+        new THREE.PlaneGeometry(sizeOfTileX-10, sizeOfTileY-10),
+        new THREE.MeshLambertMaterial({color: 0x00ff00, transparent: true, opacity: 0.6}));
+    tmpGround.position.x = 180;
+    tmpGround.position.y = 0;
+    scene.add(tmpGround);
+
+
     for (x = minX; x <= maxX; x = x+sizeOfTileX){
         for (y = minY; y <= maxY; y = y+sizeOfTileY){
+
+
+            if ((x === 60 && y === 0) || (x === -120 && y === 0) || (x === 180 && y === 0))
+                continue;
 
             color = colors[Math.floor(Math.random()*colors.length)];
        
@@ -66,7 +105,7 @@ function Ground(color, size_x, size_y, nb_tile)
 
 function Light(name, color, position)
 {
-    pointLight = new THREE.PointLight(color, 50, 350);
+    pointLight = new THREE.PointLight(color, 50, 950);
 
     pointLight.position.x = position.split(',')[0];
     pointLight.position.y = position.split(',')[1];
