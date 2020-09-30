@@ -19,13 +19,22 @@ A video game with three.js
 
 **TO DO**
 
-- [ ] : As a player, I want to turn right/left to be able to change my direction (right/left)
-- [ ] : As a player, I want a better light to be able to see all the map
-- [ ] : As a player, I don't want any error in the Console bar 
-- [ ] : As a player, I want to be stop when I go into the left wall
-- [ ] : As a player, I want to have a ground when I start the game
-- [ ] : As a player, I want to see ennemy
-- [ ] : As a player, I want to destroy ennemy when I shot them
-- [ ] : As a ennemy, I want to move on one axe
-- [ ] : As a player, I want to decrease my life when I am touch by an ennemy
-- [ ] : As a player, I want to decrease my life when I fall 
+- [X] : As a player, I want to turn right/left to be able to change my direction (right/left)
+- [X] : As a player, I want a better light to be able to see all the map
+- [X] : As a player, I don't want any error in the Console bar 
+- [X] : As a player, I want to be stop when I go into the left wall
+- [X] : As a player, I want to have a ground when I start the game
+- [X] : As a player, I want to see ennemy
+- [X] : As a player, I want to destroy ennemy when I shot them
+- [X] : As a ennemy, I want to move on one axe
+- [X] : As a player, I want to decrease my life when I am touch by an ennemy
+- [X] : As a player, I want to decrease my life when I fall 
+
+
+note 80 / 100
+
+Mes ennemy ne sont pas de bon IA et ne tire pas pour l'instant.
+Il est impossible de tester si je perd de la vie lorsque que l'on m'a tirée dessus.
+Pour différencier la mort à une vie en moins, lorsque l'on perd une vie,
+nous sommes téléporté à notre position initiale alors que lorsqu'on est mort,
+la scene est rénitialiser.

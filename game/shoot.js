@@ -51,6 +51,24 @@ function bullet_collision()
             bullet_y >= player2.position.y - 7 &&
             bullet_y <= player2.position.y + 7 )
         {
+            if (player1.life === 1)
+                player1.dead()
+            else {
+                player1.bullets.splice(i, 1);
+                i--;
+                player1.life -= 1
+            }
+
+
+        }
+
+
+        // Player2 collision
+        if ( bullet_x >= player2.position.x - 7 &&
+            bullet_x <= player2.position.x + 7 &&
+            bullet_y >= player2.position.y - 7 &&
+            bullet_y <= player2.position.y + 7 )
+        {
             if (player2.life === 1)
             scene.remove(player1.bullets[i]);
             player1.bullets.splice(i, 1);
@@ -60,7 +78,7 @@ function bullet_collision()
 
         }
 
-        // Player2 collision
+        // Player1 collision
         else if ( bullet_x >= player3.position.x - 7 &&
             bullet_x <= player3.position.x + 7 &&
             bullet_y >= player3.position.y - 7 &&
@@ -127,7 +145,12 @@ function player_falling()
                 && (y > tileY)
                 && (y < mtileY))
             {
-               player1.dead();
+                if (player1.life === 1)
+                    player1.dead();
+                else {
+                    player1.life -= 1
+                    player1.position = new THREE.Vector2(60, 0)
+                }
             }
         }
     }
